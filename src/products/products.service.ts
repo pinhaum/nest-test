@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from './product.model';
 
 @Injectable()
@@ -14,5 +14,13 @@ export class ProductsService {
 
   fetchProducts() {
     return [...this.products];
+  }
+
+  fetchSingleProduct(productId: string) {
+    const product = this.products.find((prod) => prod.id === productId);
+    if (!product) {
+      throw new NotFoundException('Could not find Product');
+    }
+    return { ...product };
   }
 }
