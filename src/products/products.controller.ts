@@ -53,8 +53,8 @@ export class ProductsController {
     return null;
   }
 
-  @Delete('id')
-  removeProduct(@Param('id') prodId: string) {
+  @Delete(':id')
+  deleteProduct(@Param('id') prodId: string) {
     this.productsService.deleteProduct(prodId);
     return null;
   }
